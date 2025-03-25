@@ -1,0 +1,7 @@
+numpy
+pandas
+spacy
+nltk
+matplotlib
+pandarallel
+pyarrow
