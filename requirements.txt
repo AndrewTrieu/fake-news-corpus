@@ -5,3 +5,7 @@ nltk
 matplotlib
 pandarallel
 pyarrow
+scikit-learn
+torch
+transformers
+accelerate

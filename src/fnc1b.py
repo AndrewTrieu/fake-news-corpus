@@ -73,3 +73,23 @@ df_sample.to_csv(f"{sample_path}.csv", index=False)
 df_sample.to_parquet(f"{sample_path}.parquet", index=False)
 
 print(f"💾 Sample saved to '{sample_path}.csv' and '{sample_path}.parquet'.")
+
+# Split to 80/10/10 and save as both CSV and Parquet
+train_size = int(len(df_sample) * 0.8)
+valid_size = int(len(df_sample) * 0.1)
+test_size = len(df_sample) - (train_size + valid_size)  # Ensure the sum is correct
+
+df_train = df_sample.iloc[:train_size]
+df_valid = df_sample.iloc[train_size:train_size + valid_size]
+df_test = df_sample.iloc[train_size + valid_size:]
+
+df_train.to_csv(f"{sample_path}_train.csv", index=False)
+df_valid.to_csv(f"{sample_path}_valid.csv", index=False)
+df_test.to_csv(f"{sample_path}_test.csv", index=False)
+
+df_train.to_parquet(f"{sample_path}_train.parquet", index=False)
+df_valid.to_parquet(f"{sample_path}_valid.parquet", index=False)
+df_test.to_parquet(f"{sample_path}_test.parquet", index=False)
+
+print(f"💾 Train/Valid/Test splits saved to '{sample_path}_train.csv', '{sample_path}_valid.csv', '{sample_path}_test.csv'.")
+

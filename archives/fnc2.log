@@ -1,0 +1,27 @@
+📚 Loading data from Parquet file at '../data/sampled_fakenews_train.parquet'
+📚 Loading data from Parquet file at '../data/sampled_fakenews_valid.parquet'
+📚 Loading data from Parquet file at '../data/sampled_fakenews_test.parquet'
+🧮 Grouping into binary classes...
+🪙 Preprocessing text...
+🔍 Training models...
+
+📊 Logistic Regression Test Performance:
+              precision    recall  f1-score   support
+
+    Reliable       0.84      0.90      0.87     54706
+        Fake       0.80      0.70      0.75     30584
+
+    accuracy                           0.83     85290
+   macro avg       0.82      0.80      0.81     85290
+weighted avg       0.83      0.83      0.83     85290
+
+
+📊 Naïve Bayes Test Performance:
+              precision    recall  f1-score   support
+
+    Reliable       0.79      0.92      0.85     54706
+        Fake       0.79      0.57      0.67     30584
+
+    accuracy                           0.79     85290
+   macro avg       0.79      0.74      0.76     85290
+weighted avg       0.79      0.79      0.78     85290
