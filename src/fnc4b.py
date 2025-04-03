@@ -2,10 +2,9 @@ import torch
 from torch.utils.data import Dataset
 import pandas as pd
 import numpy as np
-from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import classification_report
 from tqdm import tqdm
 from transformers import DistilBertTokenizerFast, DistilBertForSequenceClassification
-import matplotlib.pyplot as plt
 
 # 1. Load and preprocess LIAR dataset
 print("📚 Loading LIAR dataset...")
@@ -16,8 +15,10 @@ print("🧮 Grouping into binary classes...")
 liar_fake_labels = {'false', 'pants-fire'}  # Update with your actual LIAR labels
 liar_test['label'] = liar_test.iloc[:, 1].apply(lambda x: 1 if x in liar_fake_labels else 0)
 
+liar_test = liar_test.dropna(subset=["processed_text"])
+
 # 2. Load model and tokenizer
-model_path = "./fake_news_bert"
+model_path = "../fake_news_bert"
 print(f"⬇️ Loading model from {model_path}...")
 tokenizer = DistilBertTokenizerFast.from_pretrained(model_path, do_lower_case=True)
 model = DistilBertForSequenceClassification.from_pretrained(model_path, num_labels=2)
@@ -28,7 +29,7 @@ def tokenize_data(texts, max_length=512):
     results = {'input_ids': [], 'attention_mask': []}
     batch_size = 1000
     
-    for i in tqdm(range(0, len(texts), batch_size, desc="Tokenizing")):
+    for i in tqdm(range(0, len(texts), batch_size), desc="Tokenizing", unit="batch"):
         batch = texts[i:i+batch_size]
         encoded = tokenizer(
             batch,

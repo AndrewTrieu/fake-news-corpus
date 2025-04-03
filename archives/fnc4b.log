@@ -1,0 +1,23 @@
+📚 Loading LIAR dataset...
+🧮 Grouping into binary classes...
+⬇️ Loading model from C:/Users/andre/OneDrive/Documents/code/fake_news_bert...
+Some weights of the model checkpoint at C:/Users/andre/OneDrive/Documents/code/fake_news_bert were not used when initializing DistilBertForSequenceClassification: ['loss_fct.weight']
+- This IS expected if you are initializing DistilBertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing DistilBertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+🪙 Tokenizing text...
+Tokenizing: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 16.52batch/s] 
+
+📝 Creating dataset...
+
+🧪 Evaluating on LIAR test set...
+Predicting: 100%|█████████████████████████████████████████████████████████████████████████████████████████████| 40/40 [00:09<00:00,  4.01it/s]
+
+📊 DistilBERT Performance on LIAR Dataset:
+              precision    recall  f1-score   support
+
+    Reliable       0.74      0.67      0.70       926
+        Fake       0.28      0.34      0.31       338
+
+    accuracy                           0.59      1264
+   macro avg       0.51      0.51      0.51      1264
+weighted avg       0.61      0.59      0.60      1264
