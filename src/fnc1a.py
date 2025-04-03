@@ -32,31 +32,29 @@ except OSError:
 print_log("📖 spaCy model loaded.")
 
 # Paths
-csv_path = "../data/news_cleaned_2018_02_13.csv"
-parquet_path = "../data/news_cleaned_2018_02_13.parquet"
-output_parquet = "../data/processed_fakenews.parquet"
-output_csv = "../data/processed_fakenews.csv"
+input_path = "../data/news_cleaned_2018_02_13"
+output_path = "../data/processed_fakenews"
 
 # Convert CSV to Parquet if needed
-if os.path.exists(parquet_path):
-    data_path = parquet_path
-elif os.path.exists(csv_path):
+if os.path.exists(input_path + ".parquet"):
+    data_path = input_path + ".parquet" 
+elif os.path.exists(input_path + ".csv"):
     print_log("🔄 Converting CSV to Parquet...")
     
     chunksize=1e5
     pqwriter = None
-    for i, df in enumerate(pd.read_csv(csv_path, lineterminator="\n", on_bad_lines="skip", chunksize=chunksize, usecols=["id", "content", "type"])):
+    for i, df in enumerate(pd.read_csv(input_path + ".csv", lineterminator="\n", on_bad_lines="skip", chunksize=chunksize, usecols=["id", "content", "type"])):
         table = pa.Table.from_pandas(df)
         # If it's the first chunk, create a new parquet writer
         if i == 0:
-            pqwriter = pq.ParquetWriter(parquet_path, table.schema)            
+            pqwriter = pq.ParquetWriter(input_path + ".parquet", table.schema)            
         pqwriter.write_table(table)
 
     if pqwriter:
         pqwriter.close()
 
     print_log("✅ Conversion complete.")
-    data_path = parquet_path
+    data_path = input_path + ".parquet"
 else:
     print_log("❌ Error: No dataset found.")
     exit()
@@ -120,12 +118,12 @@ for batch in parquet_file.iter_batches(batch_size):
 
 # Save processed data
 final_df = pd.concat(processed_chunks, ignore_index=True)
-final_df.to_parquet(output_parquet, index=False)
-final_df.to_csv(output_csv, index=False)
+final_df.to_parquet(output_path + ".parquet", index=False)
+final_df.to_csv(output_path + ".csv", index=False)
 
-print_log(f"💾 Processed data saved to '{output_parquet}' and '{output_csv}'")
+print_log(f"💾 Processed data saved to '{output_path + ".parquet"}' and '{output_path + ".csv"}'")
 
-# Print statistics
+# Print statisticsoutput_csv, index=False)
 total_vocab_before = len(vocab_before)
 total_vocab_after_stopwords = len(vocab_after_stopwords)
 total_vocab_after_stemming = len(vocab_after_stemming)

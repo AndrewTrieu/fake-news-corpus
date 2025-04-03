@@ -5,7 +5,7 @@
 🪙 Preprocessing text...
 🔍 Training models...
 
-📊 Logistic Regression Test Performance:
+📊 Logistic Regression FakeNewsCorpus Performance:
               precision    recall  f1-score   support
 
     Reliable       0.84      0.90      0.87     54706
@@ -16,7 +16,7 @@
 weighted avg       0.83      0.83      0.83     85290
 
 
-📊 Naïve Bayes Test Performance:
+📊 Naïve Bayes FakeNewsCorpus Performance:
               precision    recall  f1-score   support
 
     Reliable       0.79      0.92      0.85     54706
@@ -25,3 +25,28 @@ weighted avg       0.83      0.83      0.83     85290
     accuracy                           0.79     85290
    macro avg       0.79      0.74      0.76     85290
 weighted avg       0.79      0.79      0.78     85290
+
+📚 Loading LIAR dataset...
+🧮 Grouping into binary classes...
+🪙 Preprocessing text...
+
+📊 Logistic Regression LIAR Performance:
+              precision    recall  f1-score   support
+
+    Reliable       0.75      0.79      0.77       926
+        Fake       0.32      0.26      0.29       338
+
+    accuracy                           0.65      1264
+   macro avg       0.53      0.53      0.53      1264
+weighted avg       0.63      0.65      0.64      1264
+
+
+📊 Naïve Bayes LIAR Performance:
+              precision    recall  f1-score   support
+
+    Reliable       0.74      0.98      0.84       926
+        Fake       0.55      0.06      0.11       338
+
+    accuracy                           0.74      1264
+   macro avg       0.65      0.52      0.48      1264
+weighted avg       0.69      0.74      0.65      1264
